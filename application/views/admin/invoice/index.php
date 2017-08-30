@@ -7,23 +7,23 @@
        <div class="card">
         <!-- Custom Tabs -->
         <?php if($this->session->flashdata("message")){?>
-        <div class="alert alert-success">      
+        <div class="alert alert-success">
         <?php echo $this->session->flashdata("message")?>
         </div>
         <?php } ?>
             <div class="header">
                         <h2>
-                            <?php echo $title; ?>                           
+                            <?php echo $title; ?>
                         </h2>
                     </div>
             <div class="body">
             <div class="row">
               <div class="col-lg-12">
-             <form class="form-horizontal" id="inv_form" action="<?php echo base_url().'invoice/add_edit' ?>" method="post" enctype='multipart/form-data'>
+             <form class="form-horizontal" id="inv_form" action="<?php echo base_url().'admin/invoice/add_edit' ?>" method="post" enctype='multipart/form-data'>
               <div class="box-body">
                 <h4 class="b-r"> <strong><?php echo lang('general_information'); ?>:</strong> </h4>
                 <hr>
-                <div class="row"> 
+                <div class="row">
                   <div class="col-md-6">
                     <div class="form-group form-float">
                       <label class=" col-sm-4" for=""><?php echo lang('build_date'); ?>:</label>
@@ -54,7 +54,7 @@
                                 <div class="form-line m-b-10">
                         <select name="customer_name" id="CNselectbox" class="col-md-8 form-control" required style="width: 74%;margin-right: 1%;">
                           <option value="">Select Customer Name</option>
-                          <?php  
+                          <?php
                             foreach ($customers as $key => $value) {
                               $selected = '';
                               if(isset($result->customer_name) && $result->customer_name == $value->customers_id) {
@@ -75,7 +75,7 @@
                       <label class=" col-sm-4" for=""><?php echo lang('status') ?>:</label>
                       <div class="col-sm-8">
                         <select name="status" id="" class="form-control">
-                          <?php  
+                          <?php
                             $status_arr = explode(',', $setting[0]->invoice_status);
                             foreach ($status_arr as $key => $value) {
                               $selected = '';
@@ -109,7 +109,7 @@
                   <hr>
                   <div class="products-main-div">
                     <?php
-                    if(isset($result)) { 
+                    if(isset($result)) {
                       $product_details = json_decode($result->product_details);
                     }
                     $count = 0;
@@ -142,7 +142,7 @@
                             <div class="col-md-1">
 
                               <button class="btn bg-deep-orange btn-circle waves-effect waves-circle waves-float rm-row" type="button" title="Remove Row"><i class="material-icons col-red">remove</i></button>
-                              
+
                             </div>
                           </div>
                         </div>
@@ -151,7 +151,7 @@
                     } while($count > $i);
                     ?>
                   </div>
-                  
+
                   <div class="col-md-12">
                     <div class="form-group">
                       <div class="col-md-1 col-md-offset-11">
@@ -161,8 +161,8 @@
                       </div>
                     </div>
                   </div>
-                  
-                  
+
+
                   <div class="m-b-20">
                     <div class="col-md-5"> <div class="form-group form-float"><div class="form-line focused">
                       <input type="number" class="form-control discount-input" value="<?php echo isset($result->discount)?$result->discount:'0';?>" name="discount">
@@ -182,19 +182,19 @@
                   <div class="row cal-row">
                     <div class="col-md-12">
                       <div class="col-md-9 p-l-0">
-                        <label for="" class=""><?php echo lang('sub_total'); ?>: </label> 
+                        <label for="" class=""><?php echo lang('sub_total'); ?>: </label>
                       </div>
                       <div class="col-md-3">
                         <div class="total">
-                          <span class="badge btn-color total-amt mka-badge"><?php echo isset($result->subtotal)?number_format($result->subtotal, 2) :'0';?></span> 
-                          
+                          <span class="badge btn-color total-amt mka-badge"><?php echo isset($result->subtotal)?number_format($result->subtotal, 2) :'0';?></span>
+
                           <input type="hidden" name="subtotal" value="<?php echo isset($result->subtotal)?number_format($result->subtotal, 2):'0';?>">
-                          
+
                         </div>
-                      </div> 
+                      </div>
                     </div>
-                    
-                    
+
+
                   </div>
                   <div class="tax-mn-dv"></div>
               </div>
@@ -211,7 +211,7 @@
                   </div>
                 </div>
               </div>
-              
+
              </form>
             </div>
           </div>
@@ -224,10 +224,10 @@
       </div>
         <!-- /.col -->
       </div>
-    
-     </section>    
+
+     </section>
     <!-- /.content -->
- 
+
   <!-- /.content-wrapper -->
 <!-- Modal -->
 <div id="previewModal" class="modal fade" role="dialog">
@@ -239,7 +239,7 @@
         <h4 class="modal-title"><?php echo lang('invoice_preview'); ?></h4>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('close'); ?></button>
@@ -256,7 +256,7 @@
           <h4 class="modal-title"><?php echo lang('customers'); ?></h4>
       </div>
       <div class="modal-body">
-          
+
             <div class="form-group form-float">
               <div class="form-line">
                 <input type="text" class="form-control CNnameinput" id="name" name="name" required value="">
@@ -277,7 +277,7 @@
 $(document).ready(function() {
   /*$('dody').on('click', 'a.generateInv' , function() {
     alert('dfg');
-    generateInv( $(this).attr('rel') );    
+    generateInv( $(this).attr('rel') );
   });*/
   <?php  if(isset($this->session->get_userdata()['view_invoice']) && $this->session->get_userdata()['view_invoice'] != ''){ ?>
     generateInv( $('input[name="id"]').val() );
@@ -292,7 +292,7 @@ $(document).ready(function() {
 
 
 
-  <?php 
+  <?php
     $date_format = 'dd-mm-yy';
     if(isset($setting[0]->date_formate) && $setting[0]->date_formate != '') {
       $date_format = $setting[0]->date_formate;
@@ -320,7 +320,7 @@ $(document).ready(function() {
             '<label class="form-label" for=""><?php echo lang("qty"); ?></label>'+
             '<input type="hidden" value="">'+
           '</div><span class="error_msgg text-red"></span></div></div>'+
-          
+
           '<div class="col-md-2 unit_price"><div class="form-group form-float"><div class="form-line">'+
             '<input type="number" class="form-control uprice" name="unitprice[]" id="" value="" required>'+
             '<label class="form-label" for=""><?php echo lang("unit_price"); ?></label>'+
@@ -363,7 +363,7 @@ $(document).ready(function() {
               qty_status = 'ok';
            }
         }else{
-            var qty_status = checkquantity(__obj.attr('data-id'), qval);          
+            var qty_status = checkquantity(__obj.attr('data-id'), qval);
         }
         $val = $unitprice * __obj.val();
         __obj.parents('.products-row').find('input[name="total[]"]').val($val);
@@ -374,26 +374,26 @@ $(document).ready(function() {
           //$val = $unitprice * __obj.val();
           //__obj.parents('.products-row').find('input[name="total[]"]').val($val);
           __obj.siblings('span.error_msgg').text('<?php echo lang("product_qty_exceeds_from_maximum_qty"); ?>').show();
-        } 
+        }
         calculateTotal();
-      }     
+      }
     } else {
       __obj.parents('.products-row').find('input[name="unitprice[]"]').focus();
-    }    
-    
+    }
+
   });
 
   $('.products-main-div').on('blur', 'input[name="unitprice[]"]', function() {
     __obj = $(this);
-    
+
     $quantity = __obj.parents('.products-row').find('input[name="quantity[]"]').val();
-    if($quantity != '') {      
+    if($quantity != '') {
       $val = $quantity * __obj.val();
-      __obj.parents('.products-row').find('input[name="total[]"]').val($val);          
+      __obj.parents('.products-row').find('input[name="total[]"]').val($val);
       calculateTotal();
     } else {
       __obj.parents('.products-row').find('input[name="quantity[]"]').focus();
-    }    
+    }
   });
 
   $('.discount-input').on('blur', function() {
@@ -433,7 +433,7 @@ $(document).ready(function() {
 
 var generateInv = function($id) {
   $.ajax({
-    url: '<?php echo base_url().'invoice/pdf_path/' ?>'+$id,
+    url: '<?php echo base_url().'admin/invoice/pdf_path/' ?>'+$id,
     method:'post',
   }).done(function(data){
     console.log(data);
@@ -444,7 +444,7 @@ var generateInv = function($id) {
       alert('file not found');
     }
   });
-} 
+}
 
 
 var calculateTotal = function() {
@@ -469,7 +469,7 @@ var calculateTax = function(amt) {
   $dis_type = $('.discount-type').val();
   //$('.box-footer').find('.btn').attr('disabled', true);
   $html = '';
-  $.post('<?php echo base_url().'invoice/calculateTax_ajax/'; ?>'+amt, { discount: $dis, dType: $dis_type } , function(data) {
+  $.post('<?php echo base_url().'admin/invoice/calculateTax_ajax/'; ?>'+amt, { discount: $dis, dType: $dis_type } , function(data) {
     console.log(data);
     if(data.discount > 0) {
       $html += '<div class="row cal-row">'+
@@ -498,7 +498,7 @@ var calculateTax = function(amt) {
                         '</div>'+
                       '</div>'+
                     '</div>'+
-                  '</div>';      
+                  '</div>';
       });
       setTimeout(function() {
       $html += '<div class="row cal-row">'+
@@ -542,7 +542,7 @@ $(document).on('keyup', '.pro_name', function(){
   });
 
   $.ajax({
-      url:'<?php echo base_url().'invoice/getproducts'; ?>',
+      url:'<?php echo base_url().'admin/invoice/getproducts'; ?>',
       method: 'post',
       dataType: 'json',
       data: {
@@ -580,7 +580,7 @@ $(document).on('click', '.saveCN', function(){
   var cust_name = $('.CNnameinput').val();
 
   $.ajax({
-      url:'<?php echo base_url()."invoice/add_customers"; ?>',
+      url:'<?php echo base_url()."admin/invoice/add_customers"; ?>',
       method: 'post',
       dataType: 'json',
       data: {
@@ -599,7 +599,7 @@ $(document).on('click', '.saveCN', function(){
 function checkquantity(id, qty){
   var ret = '';
   $.ajax({
-    url:'<?php echo base_url().'invoice/checkquantity' ?>',
+    url:'<?php echo base_url().'admin/invoice/checkquantity' ?>',
     method: 'post',
     dataType: 'json',
     async:false,
@@ -634,9 +634,9 @@ function validate_form_for_qty(){
          var diff = parseInt(qty) - parseInt(hidden);
          if(diff > 0){
           qty = diff;
-          res = checkquantity(product_id, qty); 
+          res = checkquantity(product_id, qty);
          }else if(diff < 0){
-          
+
          }
       }else{
           res = checkquantity(product_id, qty);
@@ -648,10 +648,10 @@ function validate_form_for_qty(){
     }else if(res == 'quantity limit exceeds'){
         check.push('0');
     }else if(res == ''){
-        check.push('1');  
+        check.push('1');
     }else{
         check.push('0');
-    }     
+    }
   });
 
   if(jQuery.inArray('0', check) != -1){
@@ -660,6 +660,6 @@ function validate_form_for_qty(){
   }else{
     return true;
   }
-  
+
 }
 </script>

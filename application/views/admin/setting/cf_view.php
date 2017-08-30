@@ -20,7 +20,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				
+
 			</tbody>
 		</table>
 	</div>
@@ -49,18 +49,18 @@
 	        },
 		});
 
-		$('body').on("click",".modalButton", function(e) {  
+		$('body').on("click",".modalButton", function(e) {
 	    	var loading = '<img src="<?php echo mka_base() ?>assets/images/loading.gif" />';
 	    	$("#custom_fields_modal").find(".modal-body").html(loading);
-	    	$("#custom_fields_modal").find(".modal-body").attr("style","text-align: center");    
+	    	$("#custom_fields_modal").find(".modal-body").attr("style","text-align: center");
 		    $.ajax({
-				url : "<?php echo base_url()."setting/get_modal";?>",
-				method: "post", 
+				url : "<?php echo base_url()."admin/setting/get_modal";?>",
+				method: "post",
 				data : {
 				id: $(this).attr("data-src")
 				}
 				}).done(function(data) {
-				$("#custom_fields_modal").find(".modal-body").removeAttr("style");  
+				$("#custom_fields_modal").find(".modal-body").removeAttr("style");
 				$("#custom_fields_modal").find(".modal-body").html(data);
 				$("#custom_fields_modal").modal("show");
 				$(".form_check").each(function() {
@@ -74,7 +74,7 @@
 		          	if($res == 0) {
 		            	$(".check_box").prop("required", false);
 		          	}
-		        }) 
+		        })
 		    })
 	  	});
 
@@ -96,4 +96,4 @@
 		});
 	})
 </script>
-	
+

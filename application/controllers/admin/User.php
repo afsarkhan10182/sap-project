@@ -53,6 +53,7 @@ class User extends CI_Controller {
       * @return Void
       */
     public function login(){
+        // die('sss');
     	if(isset($_SESSION['user_details'])){
     		redirect( base_url().'user/dashboard', 'refresh');
     	}
@@ -112,7 +113,7 @@ class User extends CI_Controller {
                 $art_msg['msg'] = lang('this_account_is_not_verified_please_contact_to_your_admin');
                 $art_msg['type'] = 'danger';
                 $this->session->set_userdata('alert_msg', $art_msg);
-                redirect( base_url().'user/login', 'refresh');
+                redirect( base_url().'admin/user/login', 'refresh');
 			} else {
                 /*mkaPackageCodeAuth*/
 				$this->session->set_userdata('user_details',$return);
@@ -353,9 +354,9 @@ class User extends CI_Controller {
         is_login();
         if($this->input->post('id')){
             $data['userData'] = getDataByid('users',$this->input->post('id'),'users_id');
-            echo $this->load->view('add_user', $data, true);
+            echo $this->load->view('admin/user/add_user', $data, true);
         } else {
-            echo $this->load->view('add_user', '', true);
+            echo $this->load->view('admin/user/add_user', '', true);
         }
         exit;
     }

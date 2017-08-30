@@ -13,13 +13,13 @@ $(document).ready(function() {
           }
         })
         if($chk == 'yes'){
-          $obj.parents('.form-group').find(".check_box").prop('required', true);    
+          $obj.parents('.form-group').find(".check_box").prop('required', true);
         }
-        
+
       }
     }
   });
-	
+
 	/*$.validate({
 	    modules : 'location, date, security, file',
 	    onModulesLoaded : function() {
@@ -134,8 +134,8 @@ $(document).ready(function() {
             '<div class="form-line">'+
               '<textarea name="emails" id="" rows="5" class="form-control"></textarea>'+
               '<label for="sEmail" class="form-label">Enter Email Address</label>'+
-            '</div>'+ 
-            '<span class="help-text">Enter Valid Emails Saperated by comma (,)</span>'+   
+            '</div>'+
+            '<span class="help-text">Enter Valid Emails Saperated by comma (,)</span>'+
           '</div>'+
           '<p>'+
             '<button class="btn btn-primary pull-right send-btn">Send</button>'+
@@ -153,7 +153,7 @@ $(document).ready(function() {
     $emails = $obj.parents('.modal-body').find('textarea').val();
     if($emails != ''){
       $.ajax({
-        url: $('body').attr('data-base-url') + 'user/InvitePeople',
+        url: $('body').attr('data-base-url') + 'admin/user/InvitePeople',
         method:'post',
         data: {
           emails: $emails
@@ -177,22 +177,22 @@ $(document).ready(function() {
                                 '</div>');
           $obj.html('Send');
         }
-      });            
+      });
     } else {
       alert('Enter Email First');
     }
-  });   
+  });
 
   $(".content").on("click",".modalButtonUser", function(e) {
     $.ajax({
-      url : $('body').attr('data-base-url') + 'user/get_modal',
-      method: 'post', 
+      url : $('body').attr('data-base-url') + 'admin/user/get_modal',
+      method: 'post',
       data : {
         id: $(this).attr('data-src')
       }
     }).done(function(data) {
       $('#nameModal_user').find('.modal-body').html(data);
-      $('#nameModal_user').modal('show'); 
+      $('#nameModal_user').modal('show');
     })
   });
 
@@ -219,16 +219,16 @@ $(document).ready(function() {
       });
     });
 
-  $("body").on("click",".templateModalButton", function(e) {  
+  $("body").on("click",".templateModalButton", function(e) {
     $.ajax({
       url : $('body').attr('data-base-url') + "templates/modal_form",
-      method: "post", 
+      method: "post",
       data : {
       id: $(this).attr("data-src")
       }
       }).done(function(data) {
       $("#nameModal_Templates").find(".modal-body").html(data);
-      $("#nameModal_Templates").modal("show"); 
+      $("#nameModal_Templates").modal("show");
     })
   });
   /* Script for Templates End here */
@@ -254,7 +254,7 @@ $(document).ready(function() {
   if (confirm("Do you want to delete this File?")) {
       var check_old = $(this).parents('.form-group').find(":input.check_old").length;
       var check_required = $(this).parents('.form-group').find(":input.check_new").attr('data');
-      if(check_old == 1){ 
+      if(check_old == 1){
         if(check_required == 'required'){
             var check_new = $(this).parents('.form-group').find(":input.check_new").attr('required','required');
         }
@@ -296,10 +296,10 @@ $(document).ready(function() {
 
 function setId(id, module) {
   var url =  $('body').attr('data-base-url');
-  $("#cnfrm_delete").find("a.yes-btn").attr("href",url+"/"+ module +"/delete/"+id);
+  $("#cnfrm_delete").find("a.yes-btn").attr("href",url+"admin/"+ module +"/delete/"+id);
 }
 
-function resizeIframe(obj) { 
+function resizeIframe(obj) {
   obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
 }
 

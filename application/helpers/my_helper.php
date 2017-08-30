@@ -7,35 +7,35 @@
 	$moduleName = strtolower(str_replace(' ', '_', $moduleName));
     $permission = isset($CI->session->get_userdata()['user_details'][0]->user_type)?$CI->session->get_userdata()['user_details'][0]->user_type:'';
     //print_r($permission);die;
-    if(isset($permission) && $permission != "" ) 
+    if(isset($permission) && $permission != "" )
 	{
-		
-        if($permission == 'admin' || $permission == 'Admin') 
+
+        if($permission == 'admin' || $permission == 'Admin')
 		{
           return true;
-        } 
-		else 
-		{	
+        }
+		else
+		{
 			$getPermission = array();
 			$getPermission = json_decode(getRowByTableColomId('permission',$permission,'user_type','data'));
-			
-			
-			if (isset($getPermission->$moduleName)) 
-			{	
-			 
+
+
+			if (isset($getPermission->$moduleName))
+			{
+
 			  if(isset($moduleName) && isset($method) && $moduleName != "" && $method != "" )
-			  {		
-			  		
+			  {
+
 			  	   $method_arr = explode(',',$method);
-			  	   foreach($method_arr as $method_item){ 
+			  	   foreach($method_arr as $method_item){
 				   if(isset($getPermission->$moduleName->$method_item))
-				   {  
+				   {
 						return $getPermission->$moduleName->$method_item;
 					}
-				   
-				} 
+
+				}
 				//return 0;
-              } 
+              }
 			  else
 			  {
                 return 0;
@@ -43,15 +43,15 @@
 			}
 			else{return 0;}
        }
-    } 
-	else 
+    }
+	else
 	{
       return 0;
     }
   }
 
 	function setting_all($keys='')
-	{  
+	{
 		$CI = get_instance();
 		if(!empty($keys)){
 			$CI->db->select('*');
@@ -73,7 +73,7 @@
 			$setting= $CI->setting_model->get_setting();
 			return $setting;
 		}
-		
+
 	}
 
 
@@ -81,7 +81,7 @@
 		$CI = get_instance();
 		$CI->load->model('setting/setting_model');
 		$setting= $CI->setting_model->get_setting();
-		$result = []; 
+		$result = [];
 		foreach ($setting as $key => $value) {
 			$result[$value->keys] = $value->value;
 		}
@@ -89,7 +89,7 @@
 	}
 
 	function getRowByTableColomId($tableName='',$id='',$colom='id',$whichColom='')
-	{  
+	{
 		if($colom == 'id' && $tableName != 'users') {
 			$colom = $tableName.'_id';
 		}
@@ -100,7 +100,7 @@
 		$query = $CI->db->get();
 		$result = $query->row();
 			if(!empty($result))
-			{	
+			{
 				if(!empty($whichColom)){
 				 $result = $result->$whichColom;
 				 return $result;
@@ -114,27 +114,27 @@
 			{
 				return false;
 			}
-	
+
 	}
 
 
 	function getOptionValue($keys='')
-	{  
+	{
 		$CI = get_instance();
 		$CI->db->select('*');
 		$CI->db->from('setting');
 		$CI->db->where('keys' , $keys);
 		$query = $CI->db->get();
-		
+
 		if(!empty($query->row())){return $result = $query->row()->value;}else{return false;}
 
 	}
-	
+
 	function getNameByColomeId($tableName='',$id='',$colom='id')
-	{ 
+	{
 		if($colom == 'id') {
 			$colom = $tableName.'_id';
-		} 
+		}
 		$CI = get_instance();
 		$CI->db->select($colom);
 		$CI->db->from($tableName);
@@ -143,9 +143,9 @@
 		return $result = $query->row();
 
 	}
-	
+
 	function selectBoxDynamic($field_name='', $tableName='setting',$colom='value',$selected='',$attr='',$whereCol='',$whereVal='')
-	{   
+	{
 		$CI = get_instance();
 		$CI->db->select('*');
 		$CI->db->from($tableName);
@@ -158,7 +158,7 @@
 		   $res = '';
 			$res .='<select class="form-control" id="'.$field_name.'" name="'.$field_name.'" '.$attr.' >';
 			$res .= '<option value=""></option>';
-				foreach ($catlog_data as $catlogData){ 
+				foreach ($catlog_data as $catlogData){
 				 $select_this = '';
 				 	$tab_id = $tableName.'_id';
 					if($catlogData->$tab_id == $selected){	$select_this = ' selected ';}
@@ -166,7 +166,7 @@
 				}
 			$res .='</select>';
 		}
-		else 
+		else
 		{
 			$catlog_data = '';
 			$res = '';
@@ -178,8 +178,8 @@
 	}
 
 	function MultipleSelectBoxDynamic($field_name='', $tableName='setting',$colom='value',$selected='',$attr='',$whereCol='',$whereVal='')
-	{ 
-		$selected = explode(',', $selected);  
+	{
+		$selected = explode(',', $selected);
 		$CI = get_instance();
 		$CI->db->select('*');
 		$CI->db->from($tableName);
@@ -192,7 +192,7 @@
 		   $res = '';
 			$res .='<select multiple="multiple" class="form-control" id="'.$field_name.'" name="'.$field_name.'[]" '.$attr.' >';
 			$res .= '<option value="">Select</option>';
-				foreach ($catlog_data as $catlogData){ 
+				foreach ($catlog_data as $catlogData){
 				 $select_this = '';
 				 	$tab_id = $tableName.'_id';
 					if(in_array($catlogData->$tab_id, $selected)){	$select_this = ' selected ';}
@@ -200,7 +200,7 @@
 				}
 			$res .='</select>';
 		}
-		else 
+		else
 		{
 			$catlog_data = '';
 			$res = '';
@@ -209,34 +209,34 @@
 		}
 		return $res;
 	}
-		
+
 	function fileUpload()
-	{	
+	{
 		$CI =& get_instance();
      	$CI->load->library('email');
 		foreach($_FILES as $name => $fileInfo)
 		{
 			$filename=$_FILES[$name]['name'];
-			$tmpname=$_FILES[$name]['tmp_name']; 
+			$tmpname=$_FILES[$name]['tmp_name'];
 			$exp=explode('.', $filename);
 			$ext=end($exp);
-			$newname=  $exp[0].'_'.time().".".$ext; 
+			$newname=  $exp[0].'_'.time().".".$ext;
 			$config['upload_path'] = 'assets/images/';
 			$config['upload_url'] =  base_url().'assets/images/';
 			$config['allowed_types'] = "gif|jpg|jpeg|png|iso|dmg|zip|rar|doc|docx|xls|xlsx|ppt|pptx|csv|ods|odt|odp|pdf|rtf|sxc|sxi|txt|exe|avi|mpeg|mp3|mp4|3gp";
-			$config['max_size'] = '2000000'; 
+			$config['max_size'] = '2000000';
 			$config['file_name'] = $newname;
 			$CI->load->library('upload', $config);
 			move_uploaded_file($tmpname,"assets/images/".$newname);
 			return $newname;
 		}
 	}
-	
-  function is_login(){ 
+
+  function is_login(){
       if(isset($_SESSION['user_details'])){
           return true;
       }else{
-         redirect( base_url().'user/login', 'refresh');
+         redirect( base_url().'admin/user/login', 'refresh');
       }
   }
   function form_safe_json($json) {
@@ -247,10 +247,10 @@
     return strip_tags($json);
 }
 	function CallAPI($method, $url, $data = false)
-  {   
+  {
 	  $curl = curl_init();
 	  switch ($method)
-	  {   
+	  {
 		  case "POST":
 			  curl_setopt($curl, CURLOPT_POST, 1);
 			  if ($data)
@@ -273,7 +273,7 @@
 	  return $result;
   }
    	function getDataByid($tableName='',$columnValue='',$colume='')
-	{  
+	{
 		$CI = get_instance();
 		$CI->db->select('*');
 		$CI->db->from($tableName);
@@ -282,7 +282,7 @@
 		return $result = $query->row();
 	}
 	function getAllDataByTable($tableName='',$columnValue='*',$colume='')
-	{  
+	{
 		$CI = get_instance();
 		$CI->db->select($columnValue);
 		$CI->db->from($tableName);
@@ -301,11 +301,11 @@
 		$CI = get_instance();
 		$CI->load->database();
 		$CI->load->library('Ssp');
-    	
+
 			if(empty($columns))
 			{
 				$columns = array(
-					array( 'db' => 'name', 'dt' => 0 ),	
+					array( 'db' => 'name', 'dt' => 0 ),
 					array( 'db' => $table.'_id',  'dt' => 1 )
 					);
 			}
@@ -317,10 +317,10 @@
 			);
 
 
-		
+
 		$output_arr = SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $Join_condition, $where);
-		
-		foreach ($output_arr['data'] as $key => $value) 
+
+		foreach ($output_arr['data'] as $key => $value)
 		{
 				$id = $output_arr['data'][$key][count($output_arr['data'][$key])  - 1];
 				$output_arr['data'][$key][count($output_arr['data'][$key])  - 1] = '';
@@ -330,12 +330,12 @@
 				if(CheckPermission($table, "own_delete")){
 				$output_arr['data'][$key][count($output_arr['data'][$key])  - 1] .= '<a data-toggle="modal" class="mClass" style="cursor:pointer;"  data-target="#cnfrm_delete" title="delete" onclick="setId('.$id.')"><i class="fa fa-trash-o" ></i></a>';}
 
-		
+
 			$result = getTemplatesByModule($CI->uri->segment(1));
 			if(is_array($result) && !empty($result)) {
 				$output_arr['data'][$key][count($output_arr['data'][$key])  - 1] .= '<div class="btn-group"><a id="btnEditRow" class="mClass dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  href="javascript:;" type="button" data-src="" title="Edit"><i class="fa fa-download" data-id=""></i></a><ul class="dropdown-menu">';
 				    foreach ($result as $value) {
-					$output_arr['data'][$key][count($output_arr['data'][$key])  - 1] .= '<li><a href="#">'.$value->template_name.'</a></li>';    	
+					$output_arr['data'][$key][count($output_arr['data'][$key])  - 1] .= '<li><a href="#">'.$value->template_name.'</a></li>';
 				    }
 				$output_arr['data'][$key][count($output_arr['data'][$key])  - 1] .=  '</ul> </div>';
 			}
@@ -358,7 +358,7 @@
 	      		if($sVal == $arValue->$arrKey) {
 	        		return true;
 	      		}
-	    	}    
+	    	}
 	  	}
 	}
 
@@ -394,7 +394,7 @@
 				}
 				$html .= '<div class="col-md-12">';
 				$html .= '<div class="form-group form-float">';
-				
+
 				$v = '';
 				if(!empty($cf_val)) {
 					foreach ($cf_val as $cfvkey => $cfvvalue) {
@@ -410,7 +410,7 @@
 					$html .= '<input type="'.$rvalue->type.'" name="mkacf['.$rvalue->custom_fields_id.']" class="form-control" '.$required.' value="'.$v.'" />';
 					$html .= '<label class="form-label">'.ucfirst(lang(get_lang($crud).'_'.get_lang($rvalue->name))).' '.$ls.'</label>';
 					$html .= '</div>';
-					
+
 				} else if($rvalue->type == 'text_area') {
 					$html .= '<div class="form-line">';
 					$html .= '<textarea name="mkacf['.$rvalue->custom_fields_id.']" class="form-control" '.$required.' >'.$v.'</textarea>';
@@ -468,7 +468,7 @@
 						}
 					}
 				}
-				
+
 				$html .= '</div>';
 				$html .= '</div>';
 			}
@@ -486,7 +486,7 @@
 					  ->get('custom_fields')
 					  ->result();
 
-		return $res;	
+		return $res;
 	}
 
 

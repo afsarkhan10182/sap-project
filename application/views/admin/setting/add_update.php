@@ -1,9 +1,9 @@
-<form action="<?php echo base_url().'setting/custom_field' ?>" method="post" id="customField_form" >
+<form action="<?php echo base_url().'admin/setting/custom_field' ?>" method="post" id="customField_form" >
 	<div class="form-group form-float">
 		<div class="form-line">
 			<select name="crud_nmae" required class="form-control" id="">
 				<option value=""></option>
-				<?php 
+				<?php
 					$crud_list = $result['crud_list'];
 					$crud_list_arr = explode(',', $crud_list);
 					if(!empty($crud_list_arr)) {
@@ -13,7 +13,7 @@
 							if(isset($data->rel_crud)) {
 								if($data->rel_crud == strtolower(str_replace(' ', '_', $val))) {
 									$selected = 'selected="selected"';
-								}	
+								}
 							}
 							echo '<option value="'.strtolower(str_replace(' ', '_', $val)).'" '.$selected.' >'.$val.'</option>';
 						}
@@ -90,7 +90,7 @@
 	$.AdminBSB.input.activate();
 	var set_options = function($obj, $val) {
 		if($('.mka').length > 0) {
-			$('.mka').remove();	
+			$('.mka').remove();
 		}
 		if($obj.val() == 'options' || $obj.val() == 'checkbox' || $obj.val() == 'radio') {
 			$html = '';

@@ -3,7 +3,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	    <title>Sign In | Tailor POS</title>
+	    <title>SAP</title>
 	    <!-- Favicon-->
 	    <link rel="icon" href="<?php echo mka_base(); ?>assets/images/favicon.ico" type="image/x-icon">
 
@@ -31,7 +31,7 @@
 	<body class="hold-transition login-page">
 		<div class="login-box">
 	        <div class="logo">
-	            <a href="<?php echo base_url(); ?>"><b><?php echo 'User Login and Management'; ?></b></a>
+	            <a href="<?php echo base_url(); ?>"><b><?php echo 'SAP Admin Login'; ?></b></a>
 	        </div>
 	        <div class="card">
 	            <div class="body">

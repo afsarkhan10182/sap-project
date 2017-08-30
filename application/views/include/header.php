@@ -186,10 +186,6 @@
                     </ul>
                   </li>
 
-                  <li class="<?=($this->router->class==="about")?"active":"not-active"?>">
-                        <a href="<?php echo base_url("admin/about"); ?>"><i class="material-icons">info</i> <span><?php echo lang('about_us'); ?></span></a>
-                    </li>
-
 
                 </ul>
             </div>

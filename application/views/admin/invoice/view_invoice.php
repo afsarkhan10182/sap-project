@@ -100,7 +100,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"><?php echo lang('send_mail'); ?></h4>
       </div>
-      <form action="<?php echo base_url().'invoice/send_mail_inv' ?>" method="post">
+      <form action="<?php echo base_url().'admin/invoice/send_mail_inv' ?>" method="post">
         <div class="modal-body">
             <div class="form-group">
                 <input class="form-control" name="to" placeholder="To:">
@@ -212,7 +212,7 @@
     $('body').on('change', '.chng-status', function() {
       $obj = $(this);
       $.ajax({
-        url: '<?php echo base_url().'invoice/update_status' ?>',
+        url: '<?php echo base_url().'admin/invoice/update_status' ?>',
         type: 'POST',
         data: {
           inv_id: $obj.parents('tr').find('.generateInv').attr('rel'),
@@ -230,7 +230,7 @@
 
     $('body').on('click', '.invoice-mail', function() {
       $o = $(this);
-      $.post('<?php echo base_url().'invoice/pdf_path/'; ?>' + $o.attr('data-inv-id'),  function(mka) {
+      $.post('<?php echo base_url().'admin/invoice/pdf_path/'; ?>' + $o.attr('data-inv-id'),  function(mka) {
         $('.onv_file_name').text(basename(mka));
         $('input[name="inv_id"]').val($o.attr('data-inv-id'));
         $('#inv-mail').modal('show');
@@ -313,7 +313,7 @@ function loadDatatable(date, status) {
 
         if(cjhk == 1) {
           if($('button.btn-blk-del').length <= 0) {
-            $('.dataTables_info').before('<button data-del-url="<?php echo base_url() ?>invoice/delete/" class="btn btn-default btn-xs btn-blk-del pull-left"> <i class="material-icons text-red">delete</i></button><br><br>');
+            $('.dataTables_info').before('<button data-del-url="<?php echo base_url() ?>admin/invoice/delete/" class="btn btn-default btn-xs btn-blk-del pull-left"> <i class="material-icons text-red">delete</i></button><br><br>');
           }
         }
       }, 200);

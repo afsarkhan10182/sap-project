@@ -306,7 +306,7 @@ class Invoice extends CI_Controller {
             $this->invoice_model->delete_data($value);
         }
         $this->session->set_flashdata('message', 'Your data deleted Successfully..');
-        redirect(base_url().'invoice/view');
+        redirect(base_url().'admin/invoice/view');
     }
 
 
@@ -453,7 +453,7 @@ class Invoice extends CI_Controller {
             }
         }
 
-        redirect(base_url().'invoice/view');
+        redirect(base_url().'admin/invoice/view');
     }
 
     public function getproducts() {

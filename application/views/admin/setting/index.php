@@ -31,12 +31,6 @@
                             <span><?php echo lang("permission");?></span>
                           </a>
                         </li>
-                        <li id="templates">
-                          <a href="#templates-div" data-toggle="tab">
-                            <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
-                            <span><?php echo lang('templates'); ?></span>
-                          </a>
-                        </li>
                         <li id="custom-fields">
                           <a href="#custom-fields-div" data-toggle="tab">
                             <i class="fa fa-cog" aria-hidden="true"></i>
@@ -50,7 +44,7 @@
                           <?php $this->load->view('admin/setting/cf_view'); ?>
                         </div>
                         <div class="tab-pane fade active in" id="tab_General">
-                          <form method="post" enctype="multipart/form-data" action="<?php echo base_url().'setting/edit_setting' ?>" data-parsley-validate class="form-horizontal form-label-left demo-form2">
+                          <form method="post" enctype="multipart/form-data" action="<?php echo base_url().'admin/setting/edit_setting' ?>" data-parsley-validate class="form-horizontal form-label-left demo-form2">
                             <div class="col-md-12 m-t-20">
                               <div class="form-group form-float">
                                   <div class="form-line">
@@ -158,7 +152,7 @@
                               </form>
                             </div>
                             <div class="tab-pane fade" id="emailSetting">
-                              <form method="post" enctype="multipart/form-data" action="<?php echo base_url().'setting/edit_setting' ?>" data-parsley-validate class="form-horizontal form-label-left demo-form2">
+                              <form method="post" enctype="multipart/form-data" action="<?php echo base_url().'admin/setting/edit_setting' ?>" data-parsley-validate class="form-horizontal form-label-left demo-form2">
                                 <div class="col-md-12">
                                   <div class="">
 
@@ -242,7 +236,7 @@
                               </form>
                             </div>
                             <div class="tab-pane " id="permissionSetting">
-                              <form class="form-horizontal" action="<?php echo base_url().'setting/permission' ?>" method="post">
+                              <form class="form-horizontal" action="<?php echo base_url().'admin/setting/permission' ?>" method="post">
                               <?php
                               $permission = getAllDataByTable('permission');
                               $setPermission =array();
@@ -484,22 +478,6 @@ $(document).ready(function() {
     }
   });
 
-  $('#templates').on('click', function() {
-    $('#templates-div').html('');
-    $.ajax({
-      url: '<?php echo base_url().'templates'; ?>',
-      method:'post',
-      data:{
-        showTemplate: 'showTemplate'
-      }
-    }).done(function(data) {
-      //console.log(data);
-      $('#templates-div').html(data);
-      $('#templates-div').find('table').css({
-        width: '100%'
-      });
-    });
-  });
   // Javascript to enable link to tab
   var url = document.location.toString();
   if (url.match('#')) {

@@ -4,13 +4,13 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 invice">
 		<div class="card">
 			<div class="header">
-                <h2> 
- 					<?php echo lang('invoice_settings'); ?>                                                 
+                <h2>
+ 					<?php echo lang('invoice_settings'); ?>
                 </h2>
             </div>
     		<div class="body  table-responsive">
-    			<form role="" action="<?php echo base_url().'invoice/setting' ?>" method="post" class="">
-    				
+    			<form role="" action="<?php echo base_url().'admin/invoice/setting' ?>" method="post" class="">
+
 
 <div class="form-group form-float">
 <div class="form-line focused">
@@ -42,8 +42,8 @@
 								<?php echo $currency; ?>
 							</select>
                         </div>
-                      </div>	
-                    
+                      </div>
+
 
 
 <div class="form-group form-float m-t-20">
@@ -57,7 +57,7 @@
 
 
 
-                    
+
                     <div class="form-group m-b-i-20">
                     	<div class="col-md-10 col-md-offset-2">
                     		<div class="row form-inline">
@@ -92,13 +92,13 @@
 									</div>
 									<div class="col-md-3" style="float:inherit;">
 									<div class="form-group form-float">
-                                       <div class="form-line focused">	
+                                       <div class="form-line focused">
 										<input type="text" name="tax_value[]" value="<?php if(isset($taxes[0]->tax_value)) { echo $taxes[0]->tax_value; } ?>" class="form-control">
 										</div>
 										</div>
 										<span class="percentagecl" id="basic-addon1">%</span>
 									</div>
-									
+
 									<div class="col-md-3">
 									  <div class="form-group form-float">
                                         <div class="form-line">
@@ -124,7 +124,7 @@
 										<div class="form-group form-float">
                                        <div class="form-line focused">
 										<input type="text" name="tax_value[]" value="<?php if(isset($taxes[1]->tax_value)) { echo $taxes[1]->tax_value; } ?>" class="form-control">
-										
+
 									</div>
 									</div>
 									<span class="percentagecl" id="basic-addon1">%</span>
@@ -153,7 +153,7 @@
 										<div class="form-group form-float">
                                        <div class="form-line focused">
 										<input type="text" name="tax_value[]" value="<?php if(isset($taxes[2]->tax_value)) { echo $taxes[2]->tax_value; } ?>" class="form-control">
-										
+
 									</div>
 									</div>
 									<span class="percentagecl" id="basic-addon1">%</span>
@@ -203,7 +203,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
                     </div>
                     </div>
